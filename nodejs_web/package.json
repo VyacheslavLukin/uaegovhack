@@ -1,0 +1,13 @@
+{
+  "name": "innsoft_web_app",
+  "version": "1.0.0",
+  "description": "Docker Skeleton for the Node JS app for innsoft",
+  "author": "Ranjitha R",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
