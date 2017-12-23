@@ -16,8 +16,8 @@ def generate():
     Data is written in file fake_data.json in format as follows
     {
         passportHash: {
-            "to": string,   //  Airport name
-            "from": string  //  Airport name
+            "to": string,   //  Airport id
+            "from": string  //  Airport id
             "timestamp": string  // Datetime of customs check, in format '%Y-%m-%dT%H:%MZ'
         }
     }
