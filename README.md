@@ -9,6 +9,11 @@ Setup your first Parity PoA network with 3 authorities and 3 members.
 0. Install [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/)
 1. Run `docker-compose up -d`
 
+### RUN
+
+To start all services, just run
+```docker-compose up -d ``` in project folder
+
 ### Access the Parity UI
 Run `docker-compose logs | grep token=` to get an authenticated URL for the Parity UI.
 
@@ -45,3 +50,7 @@ curl --data '{"jsonrpc":"2.0","method":"personal_sendTransaction","params":[{"fr
 ### Setup
 
 1. ?
+
+# Open datasets and API relevant to the project
+1. [Global airports](https://old.datahub.io/dataset/global-airports)
+2. [Open flight data](https://openflights.org/data.html)
