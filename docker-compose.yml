@@ -83,20 +83,20 @@ services:
       app_net:
         ipv4_address: 172.16.0.22
 
-    web:
+  web:
       build: ./nodejs_web
       volumes:
        - /usr/app/
        - /usr/app/node_modules
       ports:
-        - "49160:5000"
+        - "5000:5000"
         
   nginx:
     build: ./nginx
     volumes:
       - /www/public
     ports:
-        - "49161:80"
+        - "80:80"
 
 
   monitor:
