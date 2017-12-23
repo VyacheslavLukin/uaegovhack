@@ -29,6 +29,8 @@ def generate():
                   "latitude", "longitude", "altitude", "zone", "dst")
     with open("../datasets/global_airports.csv", 'r') as fh:
         airports_data = parse_csv_to_json(fh, fieldnames)
+    with open("../datasets/global_airports.json", "w") as fh:
+        json.dump(airports_data, fh)
 
     for item in range(NUMBER_OF_RECORDS):
         src_airport_id = randint(1, NUMBER_OF_AIRPORTS)
