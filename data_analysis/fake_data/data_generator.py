@@ -35,13 +35,16 @@ def generate():
     for item in range(NUMBER_OF_RECORDS):
         src_airport_id = randint(1, NUMBER_OF_AIRPORTS)
         dst_airport_id = randint(1, NUMBER_OF_AIRPORTS)
-        if NUMBER_OF_AIRPORTS > src_airport_id == dst_airport_id:
-            dst_airport_id += 1
+        while str(src_airport_id) not in airports_data.keys():
+            src_airport_id = randint(1, NUMBER_OF_AIRPORTS)
+        while str(dst_airport_id) not in airports_data.keys() and dst_airport_id != src_airport_id:
+            dst_airport_id = randint(1, NUMBER_OF_AIRPORTS)
+
         timestamp = get_rand_time()
         passport_hash = get_rand_hash()
         fake_data[passport_hash] = {
-            "to": dst_airport_id,
-            "from": src_airport_id,
+            "to": airports_data[str(dst_airport_id)]['iata_faa'],
+            "from": airports_data[str(src_airport_id)]['iata_faa'],
             "timestamp": timestamp.strftime(TIME_FORMAT)
         }
 
