@@ -1,11 +1,11 @@
-pragma solidity ^0.4.16;
+pragma solidity ^1.4.16;
 
 
 
 contract SmartFace {
 
     mapping (address => string[]) mapAddressUserHash;
-    mapping (string =>travelStruct[])  mapHashPassport;
+    mapping (string => travelStruct[])  mapHashPassport;
 
 
     // to,from,aim,description,timestamp,hashPassport,address
@@ -21,8 +21,8 @@ contract SmartFace {
     }
 
     function getHash(address _faceId) constant returns (bytes32[]){
-        string []  massPassportId = mapAddressUserHash[_faceId];
-        bytes32[] result;
+        storage string massPassportId = mapAddressUserHash[_faceId];
+        memory bytes32[] result;
         for (uint i=0; i<mapAddressUserHash[_faceId].length; i++){
             result.push(stringToBytes32(mapAddressUserHash[_faceId][i]));
         }
@@ -32,7 +32,7 @@ contract SmartFace {
     function createUser(address _faceId, string _hashPassport)returns (bool){
         uint length = mapAddressUserHash[_faceId].length;
         mapAddressUserHash[_faceId].push(_hashPassport);
-        if(mapAddressUserHash[_faceId].length - 1 == lenght)return true;
+        if(mapAddressUserHash[_faceId].length - 1 == length)return true;
         return false;
     }
 
@@ -41,7 +41,7 @@ contract SmartFace {
 
     }
     function createTravel(uint _timestamp,address _faceId,string _to,string _from,string _aim,
-        string _description, string _hashPasport) returns(bool){
+        string _description, string _hashPassport) returns(bool){
         mapHashPassport[_hashPassport].push(travelStruct(_timestamp,_faceId,_to,
             _from,_aim,_description,_hashPassport));
         return true;

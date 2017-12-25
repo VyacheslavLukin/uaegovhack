@@ -118,6 +118,11 @@ services:
       app_net:
         ipv4_address: 172.16.0.200
 
+  deployer:
+    build: ./blockchain
+    networks:
+      - app_net
+
 volumes:
   authority0:
   authority1:
