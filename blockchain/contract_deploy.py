@@ -3,7 +3,6 @@ from solc import compile_source
 from web3.contract import ConciseContract
 
 filename = 'SmartFace.sol'
-# filename = 'Greeter.sol'
 with open(filename, 'r') as fh:
     smart_face_src = fh.read()
 
