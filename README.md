@@ -63,4 +63,3 @@ docker-compose logs | grep 'Contract address'
 1. [Global airports](https://old.datahub.io/dataset/global-airports)
 2. [Open flight data](https://openflights.org/data.html)
 
-## Blockchain
