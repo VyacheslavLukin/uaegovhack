@@ -9,12 +9,10 @@ with open(filename, 'r') as fh:
 
 
 compiled_sol = compile_source(smart_face_src)
-# contract_interface = compiled_sol['<stdin>:Greeter']
-contract_interface = compiled_sol['<stdin>:SmartFace']
+contract_interface = compiled_sol['<stdin>:DubaiSmartFace']
 
 
 w3 = Web3(HTTPProvider('http://authority0:8545'))
-# w3 = Web3(HTTPProvider('http://localhost:8545'))
 contract = w3.eth.contract(abi=contract_interface['abi'], bytecode=contract_interface['bin'])
 w3.personal.unlockAccount("0x6B0c56d1Ad5144b4d37fa6e27DC9afd5C2435c3B", "")
 # Get transaction hash from deployed contract
