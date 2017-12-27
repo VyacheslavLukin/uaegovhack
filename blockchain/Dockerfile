@@ -8,5 +8,3 @@ WORKDIR /deployer
 COPY . /deployer/
 RUN pip3 install -r requirements.txt
 
-CMD [ "python3", "contract_deploy.py" ]
-

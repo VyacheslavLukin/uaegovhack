@@ -122,6 +122,7 @@ services:
     build: ./blockchain
     networks:
       - app_net
+    command: "/deployer/wait_parity.sh && python3 /deployer/contract_deploy.py"
 
 volumes:
   authority0:
