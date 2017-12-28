@@ -83,6 +83,21 @@ services:
       app_net:
         ipv4_address: 172.16.0.22
 
+  web:
+      build: ./nodejs_web
+      volumes:
+       - /usr/app/
+       - /usr/app/node_modules
+      ports:
+        - "5000:5000"
+        
+  nginx:
+    build: ./nginx
+    volumes:
+      - /www/public
+    ports:
+        - "80:80"
+
 
   monitor:
     image: buythewhale/ethstats_monitor
@@ -102,6 +117,12 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.0.200
+
+  deployer:
+    build: ./blockchain
+    networks:
+      - app_net
+    command: "/deployer/wait_parity.sh && python3 /deployer/contract_deploy.py"
 
 volumes:
   authority0:
