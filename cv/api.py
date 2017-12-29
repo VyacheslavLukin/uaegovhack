@@ -19,6 +19,7 @@
 import os
 import json
 import numpy as np
+import uuid
 from sklearn.neural_network import MLPClassifier
 from flask import Flask, jsonify, request, redirect
 from cv.face_recognition import face_recognition
@@ -74,7 +75,7 @@ def recognize_face(file_stream):
         if len(vector) == 0:
             result["error"] = 'This image has not faces'
         if result['error'].__len__() > 0:
-            return json.dumps(result)
+            return result
 
         vector = vector[0]
         probabilities = clf.predict_proba(vector)[0]
@@ -85,10 +86,25 @@ def recognize_face(file_stream):
             face_id = -1
 
         result["face_id"] = face_id
-        return json.dumps(result)
+        return result
 
 
 @app.route('/get_face_id', methods=['POST'])
+def get_face_id():
+    # Check if a valid image file was uploaded
+    if 'file' not in request.files:
+        return redirect(request.url)
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect(request.url)
+
+    if file and allowed_file(file.filename):
+        return json.dumps(recognize_face(file))
+
+
+@app.route('/new_image', methods=['POST'])
 def upload_image():
     # Check if a valid image file was uploaded
     if 'file' not in request.files:
@@ -100,10 +116,24 @@ def upload_image():
         return redirect(request.url)
 
     if file and allowed_file(file.filename):
-        return recognize_face(file)
+        # Check that image is not existed
+        face_id = recognize_face(file)['face_id']
+        if face_id != -1:
+            result = {
+                "face_id": face_id,
+                "error": "This image is existed"
+            }
+        else:
+            id = str(uuid.uuid4())
+            file.save(os.path.join(os.path.dirname(__file__), 'images', id + '.' + file.filename.split('.')[-1]))
+            train_classifier()
+            result = {
+                "face_id": id,
+                "error": ""
+            }
+        return json.dumps(result)
 
 
 if __name__ == "__main__":
     train_classifier()
-    # print(recognize_face('images/download.jpeg'))
     app.run(host='0.0.0.0', port=5001, debug=True)
