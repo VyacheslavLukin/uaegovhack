@@ -21,11 +21,24 @@
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="../bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+    <!-- <script type="text/javascript" src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script type="text/javascript" src="../node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script> -->
+
 
     <!-- Angular Files -->
     <script src="js/app.js"></script>
     <script src="js/gservice.js"></script>
     <script src="js/addCtrl.js"></script>
+    <script src="js/queryCtrl.js"></script>
+    <script src="js/headerCtrl.js"></script>
+<script>
+var invokeUploadFile = function(that) {
+  console.log("*** That",that);
+  document.addForm.imageId = that.value;
+//  $scope.imageId = that.value;
+}
+</script>
+
 </head>
 
 <body>
@@ -33,8 +46,15 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="container">
-  <!-- Header Title -->
+<!-- Header Menu. Note use of headerCtrl -->
+   <div class="header" ng-controller="headerCtrl">
+
+       <!-- Header items are made active upon selection -->
+       <ul class="nav nav-pills pull-right">
+            <li ng-class="{ active: isActive('/add')}"><a href="/#/add">Add the User</a></li>
+           <li ng-class="{ active: isActive('/find')}"><a href="/#/find">Find about User</a></li>
+       </ul>
+
         <h3 class="text-muted">Innosoft App</h3>
     </div>
 

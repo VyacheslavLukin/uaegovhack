@@ -6,11 +6,16 @@ var Schema      = mongoose.Schema;
 var UserSchema = new Schema({
     username: {type: String, required: true},
     gender: {type: String, required: true},
-    age: {type: Number, required: true},
-    nationality: {type: String, required: true},
-    location: {type: [{}], required: true}, // [Long, Lat]
-    origin : {type: [Number], required: true}, // [Long, Lat]
-    htmlverified: String,
+    birthdate: {type: String, required: true},
+    lastname: {type: String, required: true},
+    firstname: {type: String, required: true},
+    country: {type: String, required: true},
+    issuedate: {type: String, required: true},
+    expirydate: {type: String, required: true},
+    placeofissue: {type: String, required: true},
+    image: {type: String},
+    location: {type: [{}]}, // [Long, Lat]
+    origin : {type: [Number]}, // [Long, Lat]
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
 });

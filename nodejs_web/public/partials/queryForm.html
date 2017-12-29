@@ -6,7 +6,7 @@
 
         <!-- Panel Title -->
         <div class="panel-heading">
-            <h2 class="panel-title text-center">Innosoft- Add User<span class="glyphicon glyphicon-map-marker"></span></h2>
+            <h2 class="panel-title text-center">Innosoft- Search User<span class="glyphicon glyphicon-map-marker"></span></h2>
         </div>
 
         <!-- Panel Body -->
@@ -21,9 +21,8 @@
                     <input type="text" class="form-control" id="username" placeholder="Ranj1" ng-model="formData.username" required>
                 </div>
                 <div class="form-group">
-                    <label for="file">Image </label>
-                       <!-- <input type="file" class="form-control" id="imageId" ng-model="formData.imageId"  accept="image/*" > -->
-                       <input type="file" id="file" ngf-select ng-model="formData.file" name="file" onchange="invokeUploadFile(this)" ngf-pattern="'image/*'"accept="image/*" ngf-max-size="20MB" >
+                    <label for="image">Image </label>
+                       <input type="file" class="form-control" id="image" ng-model="formData.image"  accept="image/*">
                 </div>
                 <div class="form-group">
                     <label for="lastname">Last Name </label>
@@ -36,15 +35,15 @@
                 <label>Gender</label>
                 <div class="form-group">
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="optionsRadios" id="checkmale" value="Male" ng-model="formData.gender" ng-true-value = "'Male'">
+                        <input type="checkbox" name="optionsRadios" id="checkmale" value="Male" ng-model="formData.male" ng-true-value = "'Male'">
                         Male
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="optionsRadios" id="checkfemale" value="Female" ng-model="formData.gender" ng-true-value="'Female'">
+                        <input type="checkbox" name="optionsRadios" id="checkfemale" value="Female" ng-model="formData.female" ng-true-value="'Female'">
                         Female
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="optionsRadios" id="checkother" value="Other" ng-model="formData.gender" ng-true-value="'Other'">
+                        <input type="checkbox" name="optionsRadios" id="checkother" value="Other" ng-model="formData.other" ng-true-value="'What\'s it to ya?'">
                         Other
                     </label>
                 </div>
@@ -69,7 +68,7 @@
                     <input type="text" class="form-control" id="placeofissue" placeholder="America" ng-model="formData.placeofissue" required>
                 </div>
                 <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
-                <button type="submit" class="btn btn-danger btn-block" ng-click="addUser()" ng-disabled="addForm.$invalid">Submit</button>
+                <button type="submit" class="btn btn-danger btn-block" ng-click="findUser()" ng-disabled="addForm.$invalid">Submit</button>
             </form>
         </div>
     </div>

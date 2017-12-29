@@ -7,6 +7,7 @@ var database        = require('./app/config');
 var morgan          = require('morgan');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
+var fs              = require('fs-extra');
 var app             = express();
 
 // Express Configuration
