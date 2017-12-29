@@ -31,6 +31,8 @@ while not is_transaction_mined:
 contract_address = tx_receipt['contractAddress']
 
 print("Smart contract is deployed!")
+with open("./contract_address/contract_address.txt", "w") as fh:
+    fh.write(contract_address)
 print("Contract address: ", contract_address)
 # Contract instance in concise mode
 # contract_instance = w3.eth.contract(abi=contract_interface['abi'],
