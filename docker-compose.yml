@@ -99,6 +99,8 @@ services:
       - /www/public
     ports:
         - "80:80"
+    links:
+      - web
 
 
   monitor:
@@ -130,21 +132,21 @@ services:
 
   deployer:
     build: ./blockchain
-    networks:
-      - app_net
     command: "/deployer/wait_parity.sh && python3 /deployer/contract_deploy.py"
     volumes:
       - contract_address:/deployer/contract_address
+    networks:
+      - app_net
 
   blkchain_api:
     build: ./api_blockchain
-    networks:
-      - app_net
     command: "/usr/app/wait_deploy.sh && node main.js"
     volumes:
       - contract_address:/usr/app/contract_address
     depends_on:
       - deployer
+    networks:
+      - app_net
 
 
 volumes:
