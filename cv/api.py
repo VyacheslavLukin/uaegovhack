@@ -18,13 +18,14 @@
 
 import os
 import json
-from sklearn.svm import SVC
+import numpy as np
 from sklearn.neural_network import MLPClassifier
 from flask import Flask, jsonify, request, redirect
 from cv.face_recognition import face_recognition
 
 # You can change this to any folder on your system
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+PROBABILITY_THRESHOLD = .8
 
 app = Flask(__name__)
 clf = MLPClassifier()
@@ -50,7 +51,7 @@ def train_classifier():
     y = []
     for img_p in image_paths:
         vectors = get_vector('images/{}'.format(img_p))
-        if len(vectors) > 0 and img_p != 'download.jpeg':
+        if len(vectors) > 0:
             x.append(vectors[0])
             y.append(".".join(img_p.split('.')[:-1]))
 
@@ -73,14 +74,16 @@ def recognize_face(file_stream):
         if len(vector) == 0:
             result["error"] = 'This image has not faces'
         if result['error'].__len__() > 0:
-            return result
+            return json.dumps(result)
 
         vector = vector[0]
-        print(clf.predict_proba(vector))
-        print(clf.classes_)
-        face_id = clf.predict(vector)
-        if len(face_id) > 0:
-            face_id = face_id[0]
+        probabilities = clf.predict_proba(vector)[0]
+        max_index = np.argmax(probabilities)
+        if probabilities[max_index] >= PROBABILITY_THRESHOLD:
+            face_id = clf.classes_[max_index]
+        else:
+            face_id = -1
+
         result["face_id"] = face_id
         return json.dumps(result)
 
@@ -102,5 +105,5 @@ def upload_image():
 
 if __name__ == "__main__":
     train_classifier()
-    print(recognize_face('images/download.jpeg'))
-    # app.run(host='0.0.0.0', port=5001, debug=True)
+    # print(recognize_face('images/download.jpeg'))
+    app.run(host='0.0.0.0', port=5001, debug=True)
