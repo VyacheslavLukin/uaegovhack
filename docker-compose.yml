@@ -122,6 +122,12 @@ services:
       app_net:
         ipv4_address: 172.16.0.200
 
+  cv:
+    build: ./cv
+    ports:
+      - "5001:5001"
+    command: python3 api.py
+
   deployer:
     build: ./blockchain
     networks:

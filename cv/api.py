@@ -22,7 +22,7 @@ import numpy as np
 import uuid
 from sklearn.neural_network import MLPClassifier
 from flask import Flask, jsonify, request, redirect
-from cv.face_recognition import face_recognition
+from face_recognition import face_recognition
 
 # You can change this to any folder on your system
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
