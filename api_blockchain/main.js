@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser')
 const express = require('express')
+const parity = require('./requestToParity');
 const app = express()
 const ethereum = require('./blockchainRequest')
 const port = process.env.PORT || 5000
@@ -9,12 +10,16 @@ require('ethereum-web3-plus');
 app.use(bodyParser.json())
 
 
+
 app.post('/createUser', async (req, res) => {
-  let faceId = req.body.faceId
-  let hashPassport = req.body.hashPassport
+
   try {
-   let test =  ethereum.createUser(faceId, hashPassport);
-   console.log(test);
+    let faceId = await req.body.faceId
+    let hashPassport = await req.body.hashPassport
+    let faceidFromParity = await parity.requestToParity(faceId);
+    console.log("from Parity"+faceidFromParity.result)
+    ethereum.createUser(faceidFromParity, hashPassport);
+
     res.send({"result":true})
   }
   catch (err) {
@@ -24,12 +29,17 @@ app.post('/createUser', async (req, res) => {
 
 app.get('/getPassportHash', async (req, res) => {
   try {
-    let result = await ethereum.getHash("asdad");
-    console.log(result);
+
+    console.log(req.query.faceId);
+    let faceidFromParity = await parity.requestToParity(req.query.faceId);
+    console.log("from Parity"+faceidFromParity.result)
+    let result = await ethereum.getHash(faceidFromParity);
+    let responcearray = [];
     for(var i=0;i<result.length;i++){
       console.log("uotput"+Web3.utils.hexToString(result[i]));
+      responcearray.push(Web3.utils.hexToString(result[i]))
     }
-    res.send({"result":true})
+    res.send(responcearray)
   }
   catch (err) {
     console.log(err)
