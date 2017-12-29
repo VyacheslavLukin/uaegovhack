@@ -5,7 +5,7 @@ module.exports = {
   local:
     {
         name: "user-map",
-        url: "mongodb://localhost/innosoftUsers",
+        url: "mongodb://mongo/innosoftUsers",
         port: 27017
     },
 };

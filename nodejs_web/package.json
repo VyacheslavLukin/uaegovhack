@@ -1,13 +1,14 @@
 {
-  "name": "innsoft_web_app",
-  "version": "1.0.0",
-  "description": "Docker Skeleton for the Node JS app for innsoft",
-  "author": "Ranjitha R",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.16.1"
-  }
+    "name": "Innosoft_App",
+    "version": "1.0.0",
+    "description": "Innosoft_App",
+    "main": "server.js",
+    "dependencies" : {
+        "express"    : "~4.7.2",
+        "mongoose"   : "~4.1.0",
+        "morgan"     : "~1.2.2",
+        "body-parser": "~1.5.2",
+        "jsonwebtoken": "^5.0.2",
+        "method-override": "~2.1.2"
+    }
 }

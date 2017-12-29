@@ -89,7 +89,9 @@ services:
        - /usr/app/
        - /usr/app/node_modules
       ports:
-        - "5000:5000"
+        - "3000:3000"
+      links:
+        - mongo
         
   nginx:
     build: ./nginx
@@ -107,6 +109,8 @@ services:
       app_net:
         ipv4_address: 172.16.0.100
 
+  mongo:
+    image: mongo:latest
 
   dashboard:
     image: buythewhale/ethstats
@@ -123,6 +127,12 @@ services:
     ports:
       - "5001:5001"
     command: python3 api.py
+
+  deployer:
+    build: ./blockchain
+    networks:
+      - app_net
+    command: "/deployer/wait_parity.sh && python3 /deployer/contract_deploy.py"
 
 volumes:
   authority0:
