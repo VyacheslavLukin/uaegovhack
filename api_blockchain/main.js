@@ -1,18 +1,19 @@
-const bodyParser = require('body-parser');
-const express = require('express');
-const await = require('await');
-const async = require('async');
-const parity = require('./requestToParity');
-// var cors = require('cors')
-const testData = require('./testDataTravels');
-const testData1 = require('./testDataTravels1');
-const ethereum = require('./blockchainRequest');
-const port = process.env.PORT || 5050;
-const Web3 = require('web3');
+const bodyParser      = require('body-parser');
+const express         = require('express');
+const await           = require('await');
+const async           = require('async');
+const parity          = require('./requestToParity');
+const testData        = require('./testDataTravels');
+const testData1       = require('./testDataTravels1');
+const ethereum        = require('./blockchainRequest');
+const port            = process.env.PORT || 5050;
+const Web3            = require('web3');
+var cors              = require('cors');
 require('ethereum-web3-plus');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 
 
@@ -23,8 +24,6 @@ app.post('/createUser', async (req, res) => {
     let faceidFromParity = await parity.requestToParity(faceId);
     console.log("from Parity"+faceidFromParity.result);
     ethereum.createUser(faceidFromParity, hashPassport);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     res.send({"result":true})
   }
   catch (err) {
@@ -44,8 +43,6 @@ app.get('/getPassportHash', async (req, res) => {
       console.log("oг tput"+Web3.utils.hexToString(result[i]));
       responcearray.push(Web3.utils.hexToString(result[i]))
     }
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     res.send(responcearray)
   }
   catch (err) {

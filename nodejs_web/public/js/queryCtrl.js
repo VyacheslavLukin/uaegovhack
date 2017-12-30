@@ -21,10 +21,10 @@ queryCtrl.controller('queryCtrl', function($scope, $http, $rootScope, geolocatio
 
         // Grabs all of the text box fields
         var userData = {
-            file: $scope.formData.file,
+            file: $scope.formData.file
         };
 
-        Gets the user data to the db
+        // Gets the user data to the db
         $http.post('http://localhost:5001/get_face_id', userData,
         {
                 headers: { 'Content-Type': 'multipart/form-data'}

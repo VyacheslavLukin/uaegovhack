@@ -10,10 +10,8 @@ filename = 'SmartFace.sol'
 with open(filename, 'r') as fh:
     smart_face_src = fh.read()
 
-
 compiled_sol = compile_source(smart_face_src)
 contract_interface = compiled_sol['<stdin>:DubaiSmartFace']
-
 
 w3 = Web3(HTTPProvider('http://authority0:8545'))
 # w3 = Web3(HTTPProvider('http://localhost:8545'))
@@ -42,7 +40,6 @@ contract_instance = w3.eth.contract(abi=contract_interface['abi'],
                                     address=contract_address,
                                     ContractFactoryClass=ConciseContract)
 
-
 user_addresses = [w3.personal.newAccount("justpass") for x in range(5)]
 
 passportHashes = [
@@ -53,26 +50,26 @@ passportHashes = [
     '0xou0qnkrd7z024aiqsetwnh6wdayj6g3b9lxhzecq'
 ]
 
-for item in range(len(user_addresses)):
-    cities = ['London', 'Brussel', 'Dubai', 'Moscow', 'Washington', 'Damassc']
-    city_to = choice(cities)
-    city_from = choice(cities)
-    aim = 'Tourism'
-    description = 'Trustful person'
-    timestamp = int(time.time())
-    print("Trying to create traveller with following params: \naddress: ", user_addresses[item],
-          "\nhash: ", passportHashes[item])
-    w3.personal.unlockAccount(main_account, "")
-    travel = contract_instance.createTravel(w3.toInt(timestamp),
-                                            user_addresses[item],
-                                            city_to,
-                                            city_from,
-                                            aim,
-                                            description,
-                                            passportHashes[item], transact={'from': main_account})
-    print("Travel tx_hash = ", travel)
-    w3.personal.unlockAccount(main_account, "")
-    print("getHash tx = ", contract_instance.getHash(user_addresses[item], transact={'from': main_account}))
-
-
-
+while True:
+    time.sleep(15)
+    for item in range(len(user_addresses)):
+        cities = ['London', 'Brussel', 'Dubai', 'Moscow', 'Washington', 'Damassc']
+        city_to = choice(cities)
+        city_from = choice(cities)
+        aim = 'Tourism'
+        description = 'Trustful person'
+        timestamp = int(time.time())
+        print("Trying to create traveller with following params: \naddress: ", user_addresses[item],
+              "\nhash: ", passportHashes[item])
+        w3.personal.unlockAccount(main_account, "")
+        travel = contract_instance.createTravel(w3.toInt(timestamp),
+                                                user_addresses[item],
+                                                city_to,
+                                                city_from,
+                                                aim,
+                                                description,
+                                                passportHashes[item], transact={'from': main_account})
+        print("Travel tx_hash = ", travel)
+        time.sleep(3)
+        w3.personal.unlockAccount(main_account, "")
+        print("getHash tx = ", contract_instance.getHash(user_addresses[item], transact={'from': main_account}))

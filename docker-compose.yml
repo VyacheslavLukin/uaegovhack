@@ -114,6 +114,7 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.0.100
+      external:
 
   mongo:
     image: mongo:latest

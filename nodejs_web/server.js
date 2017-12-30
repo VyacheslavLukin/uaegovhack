@@ -8,7 +8,7 @@ var morgan          = require('morgan');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var fs              = require('fs-extra');
-var cors = require('cors')
+var cors            = require('cors');
 var app             = express();
 
 // Express Configuration
