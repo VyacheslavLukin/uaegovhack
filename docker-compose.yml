@@ -92,7 +92,9 @@ services:
         - "3000:3000"
       links:
         - mongo
-        
+      networks:
+        - external
+
   nginx:
     build: ./nginx
     volumes:
@@ -101,6 +103,8 @@ services:
         - "80:80"
     links:
       - web
+    networks:
+      - external
 
 
   monitor:
@@ -113,6 +117,8 @@ services:
 
   mongo:
     image: mongo:latest
+    networks:
+      - external
 
   dashboard:
     image: buythewhale/ethstats
@@ -129,6 +135,8 @@ services:
     ports:
       - "5001:5001"
     command: python3 api.py
+    networks:
+      - external
 
   deployer:
     build: ./blockchain
@@ -143,6 +151,8 @@ services:
     command: python3 /app/app.py
     ports:
       - "5501:5501"
+    networks:
+      - external
 
   blkchain_api:
     build: ./api_blockchain
@@ -155,6 +165,7 @@ services:
       - "5050:5050"
     networks:
       - app_net
+      - external
 
 
 volumes:
@@ -164,6 +175,7 @@ volumes:
   contract_address:
 
 networks:
+  external:
   app_net:
     driver: bridge
     ipam:
