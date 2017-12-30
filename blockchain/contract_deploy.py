@@ -50,26 +50,25 @@ passportHashes = [
     '0xou0qnkrd7z024aiqsetwnh6wdayj6g3b9lxhzecq'
 ]
 
-while True:
-    time.sleep(15)
-    for item in range(len(user_addresses)):
-        cities = ['London', 'Brussel', 'Dubai', 'Moscow', 'Washington', 'Damassc']
-        city_to = choice(cities)
-        city_from = choice(cities)
-        aim = 'Tourism'
-        description = 'Trustful person'
-        timestamp = int(time.time())
-        print("Trying to create traveller with following params: \naddress: ", user_addresses[item],
-              "\nhash: ", passportHashes[item])
-        w3.personal.unlockAccount(main_account, "")
-        travel = contract_instance.createTravel(w3.toInt(timestamp),
-                                                user_addresses[item],
-                                                city_to,
-                                                city_from,
-                                                aim,
-                                                description,
-                                                passportHashes[item], transact={'from': main_account})
-        print("Travel tx_hash = ", travel)
-        time.sleep(3)
-        w3.personal.unlockAccount(main_account, "")
-        print("getHash tx = ", contract_instance.getHash(user_addresses[item], transact={'from': main_account}))
+time.sleep(15)
+for item in range(len(user_addresses)):
+    cities = ['London', 'Brussel', 'Dubai', 'Moscow', 'Washington', 'Damassc']
+    city_to = choice(cities)
+    city_from = choice(cities)
+    aim = 'Tourism'
+    description = 'Trustful person'
+    timestamp = int(time.time())
+    print("Trying to create traveller with following params: \naddress: ", user_addresses[item],
+          "\nhash: ", passportHashes[item])
+    w3.personal.unlockAccount(main_account, "")
+    travel = contract_instance.createTravel(w3.toInt(timestamp),
+                                            user_addresses[item],
+                                            city_to,
+                                            city_from,
+                                            aim,
+                                            description,
+                                            passportHashes[item], transact={'from': main_account})
+    print("Travel tx_hash = ", travel)
+    time.sleep(5)
+    w3.personal.unlockAccount(main_account, "")
+    print("getHash tx = ", contract_instance.getHash(user_addresses[item], transact={'from': main_account}))

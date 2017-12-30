@@ -25,7 +25,7 @@ queryCtrl.controller('queryCtrl', function($scope, $http, $rootScope, geolocatio
         };
 
         // Gets the user data to the db
-        $http.post('http://localhost:5001/get_face_id', userData,
+        $http.post('http://cv:5001/get_face_id', userData,
         {
                 headers: { 'Content-Type': 'multipart/form-data'}
         }).success(function (data) {
@@ -37,5 +37,6 @@ queryCtrl.controller('queryCtrl', function($scope, $http, $rootScope, geolocatio
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+
     };
 });
