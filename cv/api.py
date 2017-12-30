@@ -77,7 +77,7 @@ def recognize_face(file_stream):
         if result['error'].__len__() > 0:
             return result
 
-        vector = vector[0]
+        # vector = vector[0]
         probabilities = clf.predict_proba(vector)[0]
         max_index = np.argmax(probabilities)
         if probabilities[max_index] >= PROBABILITY_THRESHOLD:
