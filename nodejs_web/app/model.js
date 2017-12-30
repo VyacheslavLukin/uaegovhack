@@ -13,7 +13,7 @@ var UserSchema = new Schema({
     issuedate: {type: String, required: true},
     expirydate: {type: String, required: true},
     placeofissue: {type: String, required: true},
-    image: {type: String},
+    image: {type: {}},
     location: {type: [{}]}, // [Long, Lat]
     origin : {type: [Number]}, // [Long, Lat]
     created_at: {type: Date, default: Date.now},

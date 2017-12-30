@@ -8,6 +8,7 @@ var morgan          = require('morgan');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var fs              = require('fs-extra');
+var cors = require('cors')
 var app             = express();
 
 // Express Configuration
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));               // parse applica
 app.use(bodyParser.text());                                     // allows bodyParser to look at raw text
 app.use(bodyParser.json({ type: 'application/vnd.api+json'}));  // parse application/vnd.api+json as json
 app.use(methodOverride());
+app.use(cors());
 
 // Routes
 // ------------------------------------------------------
