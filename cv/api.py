@@ -23,12 +23,14 @@ import uuid
 from sklearn.neural_network import MLPClassifier
 from flask import Flask, jsonify, request, redirect
 from face_recognition import face_recognition
+from flask_cors import CORS
 
 # You can change this to any folder on your system
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 PROBABILITY_THRESHOLD = .8
 
 app = Flask(__name__)
+CORS(app)
 clf = MLPClassifier()
 
 
