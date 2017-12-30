@@ -3,8 +3,11 @@ import pandas as pd
 import json
 import collections
 from sqlalchemy import create_engine
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
+cors = CORS(app)
 
 
 def checkRoutes(user,data,crimes):
@@ -79,6 +82,7 @@ def index():
 
 
 @app.route('/analytics/', methods=['GET'])
+@cross_origin()
 def get_analytics_widget():
     name = request.args.get('user', None)
     flights, crimes = setConnection()

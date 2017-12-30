@@ -24,9 +24,7 @@ from sklearn.neural_network import MLPClassifier
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS, cross_origin
 from face_recognition import face_recognition
-from flask_cors import CORS
 
-cors = CORS(app)
 
 
 # You can change this to any folder on your system
@@ -34,7 +32,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 PROBABILITY_THRESHOLD = .8
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app)
 clf = MLPClassifier()
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -97,7 +95,7 @@ def recognize_face(file_stream):
 
 
 @app.route('/get_face_id', methods=['POST', 'OPTIONS'])
-@crossdomain(origin='*')                          #Added
+@cross_origin()
 def get_face_id():
     # Check if a valid image file was uploaded
     if 'file' not in request.files:
