@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser')
 const express = require('express')
 const parity = require('./requestToParity');
+var cors = require('cors')
 const app = express()
 const testData = require('./testDataTravels');
 const testData1 = require('./testDataTravels1');
@@ -9,7 +10,7 @@ const port = process.env.PORT || 5050
 const Web3 = require('web3');
 require('ethereum-web3-plus');
 
-app.use(bodyParser.json())
+app.use(cors(bodyParser.json()))
 
 
 
