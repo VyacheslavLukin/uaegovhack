@@ -145,6 +145,8 @@ services:
       - contract_address:/usr/app/contract_address
     depends_on:
       - deployer
+    ports:
+      - "5050:5050"
     networks:
       - app_net
 

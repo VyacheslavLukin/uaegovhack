@@ -3,7 +3,7 @@ const express = require('express')
 const parity = require('./requestToParity');
 const app = express()
 const ethereum = require('./blockchainRequest')
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5050
 const Web3 = require('web3');
 require('ethereum-web3-plus');
 
