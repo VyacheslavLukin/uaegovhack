@@ -24,6 +24,7 @@ from sklearn.neural_network import MLPClassifier
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS, cross_origin
 from face_recognition import face_recognition
+from flask_cors import CORS
 
 cors = CORS(app)
 
@@ -33,6 +34,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 PROBABILITY_THRESHOLD = .8
 
 app = Flask(__name__)
+CORS(app)
 clf = MLPClassifier()
 app.config['CORS_HEADERS'] = 'Content-Type'
 
