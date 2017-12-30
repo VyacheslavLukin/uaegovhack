@@ -1,15 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request
 import pandas as pd
-from random import randint, randrange, choice
-import csv
 import json
-import string
-from datetime import datetime, timedelta
 import collections
 from sqlalchemy import create_engine
 
 app = Flask(__name__)
-
 
 
 def checkRoutes(user,data,crimes):
@@ -21,7 +16,10 @@ def checkRoutes(user,data,crimes):
                                                (crimes.city == i.city_y))]
         if not danger.empty:
             res = pd.concat([ danger, res])
-    freq = round(len(res.country.unique())/len(tmp), 3)
+    try:
+        freq = round(len(res.country.unique())/len(tmp), 3)
+    except ZeroDivisionError:
+        freq = 0
     return res, freq
 
 
@@ -63,6 +61,7 @@ def setConnection():
     crimes = pd.read_sql_table("terror_for_demo",engine)
     return flights, crimes
 
+
 def makeJson(user, data1,crimes):
     data = {}
     data['mostFrequentLocations'] = geTopLocations(user, data1)
@@ -72,13 +71,12 @@ def makeJson(user, data1,crimes):
     data['probability'] = freq
     json_data = json.dumps(data)
     return json_data
-    
-
 
 
 @app.route('/', methods=['POST'])
 def index():
     return "Hello, World!"
+
 
 @app.route('/analytics/', methods=['GET'])
 def get_analytics_widget():
@@ -88,7 +86,7 @@ def get_analytics_widget():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5501, debug=True)
 
 
 

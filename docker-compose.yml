@@ -138,6 +138,12 @@ services:
     networks:
       - app_net
 
+  analytics:
+    build: ./data_analysis
+    command: python3 /app/app.py
+    ports:
+      - "5501:5501"
+
   blkchain_api:
     build: ./api_blockchain
     command: "/usr/app/wait_deploy.sh && node main.js"
