@@ -31,16 +31,18 @@ while not is_transaction_mined:
 contract_address = tx_receipt['contractAddress']
 
 print("Smart contract is deployed!")
+with open("./contract_address/contract_address.txt", "w") as fh:
+    fh.write(contract_address)
 print("Contract address: ", contract_address)
 # Contract instance in concise mode
-contract_instance = w3.eth.contract(abi=contract_interface['abi'],
-                                    address=contract_address,
-                                    ContractFactoryClass=ConciseContract)
+# contract_instance = w3.eth.contract(abi=contract_interface['abi'],
+#                                     address=contract_address,
+#                                     ContractFactoryClass=ConciseContract)
+#
 
-
-user_address = w3.personal.newAccount('test_pass')
-hash = "asabsdfasdlfb"
-print("Trying to create traveller with following params: \naddress: ", user_address, "\nhash: ", hash)
-contract_instance.createUser(user_address, hash, transact={'from': main_account})
-print(contract_instance.getHash(user_address, transact={'from': main_account}))
+# user_address = w3.personal.newAccount('test_pass')
+# hash = "asabsdfasdlfb"
+# print("Trying to create traveller with following params: \naddress: ", user_address, "\nhash: ", hash)
+# contract_instance.createUser(user_address, hash, transact={'from': main_account})
+# print(contract_instance.getHash(user_address, transact={'from': main_account}))
 

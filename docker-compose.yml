@@ -89,7 +89,9 @@ services:
        - /usr/app/
        - /usr/app/node_modules
       ports:
-        - "5000:5000"
+        - "3000:3000"
+      links:
+        - mongo
         
   nginx:
     build: ./nginx
@@ -97,6 +99,8 @@ services:
       - /www/public
     ports:
         - "80:80"
+    links:
+      - web
 
 
   monitor:
@@ -107,6 +111,8 @@ services:
       app_net:
         ipv4_address: 172.16.0.100
 
+  mongo:
+    image: mongo:latest
 
   dashboard:
     image: buythewhale/ethstats
@@ -118,16 +124,37 @@ services:
       app_net:
         ipv4_address: 172.16.0.200
 
+  cv:
+    build: ./cv
+    ports:
+      - "5001:5001"
+    command: python3 api.py
+
   deployer:
     build: ./blockchain
+    command: "/deployer/wait_parity.sh && python3 /deployer/contract_deploy.py"
+    volumes:
+      - contract_address:/deployer/contract_address
     networks:
       - app_net
-    command: "/deployer/wait_parity.sh && python3 /deployer/contract_deploy.py"
+
+  blkchain_api:
+    build: ./api_blockchain
+    command: "/usr/app/wait_deploy.sh && node main.js"
+    volumes:
+      - contract_address:/usr/app/contract_address
+    depends_on:
+      - deployer
+    networks:
+      - app_net
+
 
 volumes:
   authority0:
   authority1:
   authority2:
+  contract_address:
+
 networks:
   app_net:
     driver: bridge

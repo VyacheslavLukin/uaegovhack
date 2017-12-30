@@ -7,10 +7,9 @@ MAINTAINER Ranjitha R
 WORKDIR /usr/app
 
 COPY ./package.json .
+COPY ./ .
 
 RUN npm install
 
-COPY ./ .
-
-EXPOSE 5000
-CMD [ "npm", "start" ]
+EXPOSE 3000
+CMD [ "node", "server.js" ]

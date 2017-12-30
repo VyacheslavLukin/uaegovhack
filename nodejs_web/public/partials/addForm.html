@@ -1,0 +1,76 @@
+<!-- "Join Team" (Post) Form -->
+<div class="col-md-5">
+
+    <!-- Creates Main Panel -->
+    <div class="panel panel-default">
+
+        <!-- Panel Title -->
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Innosoft- Add User<span class="glyphicon glyphicon-map-marker"></span></h2>
+        </div>
+
+        <!-- Panel Body -->
+        <div class="panel-body">
+
+            <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+            <form name ="addForm" novalidate>
+
+                <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
+                <div class="form-group">
+                    <label for="username">UserFaceID </label>
+                    <input type="text" class="form-control" id="username" placeholder="Ranj1" ng-model="formData.username" required>
+                </div>
+                <div class="form-group">
+                    <label for="file">Image </label>
+                       <!-- <input type="file" class="form-control" id="imageId" ng-model="formData.imageId"  accept="image/*" > -->
+                       <input type="file" id="file" ngf-select ng-model="formData.file" name="file" onchange="invokeUploadFile(this)" ngf-pattern="'image/*'"accept="image/*" ngf-max-size="20MB" >
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name </label>
+                    <input type="text" class="form-control" id="lastname" placeholder="Hussey" ng-model="formData.lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">First Name </label>
+                    <input type="text" class="form-control" id="firstname" placeholder="Ben" ng-model="formData.firstname" required>
+                </div>
+                <label>Gender</label>
+                <div class="form-group">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="optionsRadios" id="checkmale" value="Male" ng-model="formData.gender" ng-true-value = "'Male'">
+                        Male
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="optionsRadios" id="checkfemale" value="Female" ng-model="formData.gender" ng-true-value="'Female'">
+                        Female
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="optionsRadios" id="checkother" value="Other" ng-model="formData.gender" ng-true-value="'Other'">
+                        Other
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Birth Date </label>
+                    <input type="text" class="form-control" id="birthdate" placeholder="MM/DD/YYYY" ng-model="formData.birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">CountryCode </label>
+                    <input type="text" class="form-control" id="country" placeholder="USA" ng-model="formData.country" required>
+                </div>
+                <div class="form-group">
+                    <label for="issuedate">Issue Date </label>
+                    <input type="text" class="form-control" id="issuedate" placeholder="MM/DD/YYYY" ng-model="formData.issuedate" required>
+                </div>
+                <div class="form-group">
+                    <label for="expirydate">Expiry Date </label>
+                    <input type="text" class="form-control" id="expirydate" placeholder="MM/DD/YYYY" ng-model="formData.expirydate" required>
+                </div>
+                <div class="form-group">
+                    <label for="placeofissue">Place of Issue </label>
+                    <input type="text" class="form-control" id="placeofissue" placeholder="America" ng-model="formData.placeofissue" required>
+                </div>
+                <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
+                <button type="submit" class="btn btn-danger btn-block" ng-click="addUser()" ng-disabled="addForm.$invalid">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
