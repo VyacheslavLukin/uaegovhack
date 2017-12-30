@@ -1,5 +1,5 @@
-// Declares the initial angular module "meanMapApp". Module grabs other controllers and services.
-var app = angular.module('innosoftApp', ['addCtrl', 'queryCtrl','headerCtrl','geolocation', 'gservice', 'ngRoute'])
+// Declares the initial angular module "innosoftApp". Module grabs other controllers and services.
+var app = angular.module('innosoftApp', ['addCtrl', 'queryCtrl','headerCtrl','geolocation', 'gservice', 'ngRoute','base64'])
 
     // Configures Angular routing -- showing the relevant view and controller when needed.
     .config(function($routeProvider){

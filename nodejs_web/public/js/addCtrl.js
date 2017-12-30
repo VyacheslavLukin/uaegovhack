@@ -1,17 +1,24 @@
 // Creates the addCtrl Module and Controller. Note that it depends on 'geolocation' and 'gservice' modules.
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
 
-addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice){
+addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice,$base64){
 
     // Initializes Variables
     // ----------------------------------------------------------------------------
     $scope.formData = {};
-    var imageId;
+
+    var from_data = new FormData();
+
+
+    $scope.uploadFile = function (files) {
+      console.log("*** That",files);
+        $scope.formData.file = $base64.encode(files[0]);
+        console.log("*** File encoded",$scope.formData.file);
+      };
 
     // Creates a new user based on the form fields
     $scope.addUser = function() {
 
-      var vm =this;
 
 
   //  var newImg = fs.readFileSync($scope.formData.image);
@@ -28,21 +35,15 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
           issuedate: $scope.formData.issuedate,
           expirydate: $scope.formData.expirydate,
           placeofissue: $scope.formData.placeofissue,
+          image: $scope.formData.file,
           location: [$scope.formData.longitude, $scope.formData.latitude],
-          image: $scope.formData.file
       };
       console.log("****User Data to be added",userData);
+
         // Saves the user data to the db
         $http.post('/users', userData)
             .success(function (data) {
-            //  var jsonObj = JSON.parse(data);
-              console.log('User Info Added',data[0].location);
-                // Once complete, clear the form (except location)
-
-                // Refresh the map with new data
-
-              //  gservice.refresh($scope.formData.latitude, $scope.formData.longitude,data.location);
-                  gservice.refresh('23.23','32.32',data[0].location);
+              gservice.refresh('23.23','32.32',data.location);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
