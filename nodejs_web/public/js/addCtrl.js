@@ -36,7 +36,7 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
                $scope.formData.faceId = 'A38cfgdjdABPHmqa';
              })
              .error(function (data) {
-                 console.log('FaceID: 1');
+                 console.log('FaceID: A38cfgdjdABPHmqa');
                  $scope.formData.faceId = 'A38cfgdjdABPHmqa';
              });
       };
