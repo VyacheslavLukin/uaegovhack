@@ -17,10 +17,6 @@
 
                 <!-- Text Boxes and Other User Inputs. Note ng-model binds the values to Angular $scope -->
                 <div class="form-group">
-                    <label for="username">UserFaceID </label>
-                    <input type="text" class="form-control" id="username" placeholder="Ranj1" ng-model="formData.username" required>
-                </div>
-                <div class="form-group">
                     <label for="myfile">Image </label>
                        <!-- <input type="file" id="myfile" ngf-select ng-model="formData.myfile" name="myfile" ng-change="invokeUploadFile()" accept="image/*"  > -->
                        <input type="file" name="myfile" onchange="angular.element(this).scope().uploadFile(this.files)" ng-model="formData.myfile" id="myfile" >
@@ -67,6 +63,14 @@
                 <div class="form-group">
                     <label for="placeofissue">Place of Issue </label>
                     <input type="text" class="form-control" id="placeofissue" placeholder="America" ng-model="formData.placeofissue" required>
+                </div>
+                <div class="form-group">
+                    <label for="faceId">FaceID </label>
+                    <input type="text" class="form-control" id="FaceId" placeholder="Ranj1" ng-model="formData.faceId"  readonly>
+                </div>
+                <div class="form-group">
+                    <label for="passportHash">Passport Hash </label>
+                    <input type="textarea" class="form-control" id="passportHash" placeholder="Ranj1" ng-model="formData.passportHash"  readonly>
                 </div>
                 <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
                 <button type="submit" class="btn btn-danger btn-block" ng-click="addUser()" ng-disabled="addForm.$invalid">Submit</button>

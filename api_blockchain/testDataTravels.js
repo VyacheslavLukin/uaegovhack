@@ -4,14 +4,20 @@ module.exports = {
   "departure": "London",
   "aim": "tourism",
   "description":"some information ",
-  "hashPasport":"0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8"
-},{"timeshtamp":1592344,
+  "hashPasport":"0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8",
+  "lat":"23.0",
+  "long":"32.0"
+
+},
+{"timeshtamp":1592344,
   "faceid": "fgier239rjffldg23eds",
   "destination": "London",
   "departure": "Damascus",
   "aim": "tourism",
   "description":"some information ",
-  "hashPasport":"0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8"
+  "hashPasport":"0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8",
+    "lat":"35.0",
+  "long":"32.0"
 },
   {"timeshtamp":1592244,
     "faceid": "fgier239rjffldg23eds",
@@ -19,6 +25,8 @@ module.exports = {
     "departure": "New-York",
     "aim": "work",
     "description":"some information ",
-    "hashPasport":"0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8"
+    "hashPasport":"0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8",
+      "lat":"52.0",
+  "long":"62.0"
   }]
 }

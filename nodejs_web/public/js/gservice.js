@@ -32,6 +32,7 @@ angular.module('gservice', [])
             selectedLat = latitude;
             selectedLong = longitude;
 
+            console.log("Filtered Results",filteredResults);
             // If filtered results are provided in the refresh() call...
             if (filteredResults){
 
@@ -54,16 +55,17 @@ angular.module('gservice', [])
 
             // Clear the locations holder
             var locations = [];
+            var response1 = JSON.parse(response);
 
             // Loop through all of the JSON entries provided in the response
-            for(var i= 0; i < response.length; i++) {
-                var user = response[i];
+            for(var i= 0; i < response1.length; i++) {
+                var user = response1[i];
 
                 // Create popup windows for each record
-                var  contentString = '<p><b>latitude</b>: ' + user.lat + '<br><b>Longitude</b>: ' + user.long + '<br>' +
-                    '<b>Place</b>: ' + user.place + '<br>' +  '<b>DateofTravel</b>: ' + user.dateofarrival + '<br>' +
-                    '<b>Dateofdeparture</b>: ' + user.dateofdeparture +
-                     '<br>' +  '<b>Travels</b>: ' + user.travels +'</p>';
+                var  contentString = '<p><b>timestamp</b>: ' + user.timeshtamp + '<br><b>Longitude</b>: ' + user.long + '<br>'
+                    + '<br><b>Latitude</b>: ' + user.lat + '<br><b>destination</b>: ' + user.destination + '<br>' +  '<b>departure</b>: ' + user.departure + '<br>' +
+                    '<b>aim</b>: ' + user.aim + '<br><b>HashPassport</b>: ' + user.hashPasport + '<br>' +
+                     '<br>' +  '<b>description</b>: ' + user.description +'</p>';
 
                     console.log('Content string',contentString);
 

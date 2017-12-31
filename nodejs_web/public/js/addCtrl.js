@@ -12,21 +12,23 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
 
     $scope.uploadFile = function (files) {
       console.log("*** That",files);
-        $scope.formData.file = $base64.encode(files[0]);
+        $scope.formData.file = files[0];
+         //$scope.formData.file = $base64.encode(files[0]);
         console.log("*** File encoded",$scope.formData.file);
       };
 
+      // Function for refreshing the HTML5 verified location (used by refresh button)
+    $scope.refreshHash = function(faceIdVal, passportHashVal){
+            console.log("Faace id Val",passportHashVal);
+            $scope.formData.faceId = faceIdVal;
+            $scope.formData.passportHash = passportHashVal;
+        };
     // Creates a new user based on the form fields
     $scope.addUser = function() {
 
 
 
-  //  var newImg = fs.readFileSync($scope.formData.image);
-      // encode the file as a base64 string.
-  //  var encImg = newImg.toString('base64');
-      // Grabs all of the text box fields
       var userData = {
-          username: $scope.formData.username,
           gender: $scope.formData.gender,
           lastname: $scope.formData.lastname,
           firstname: $scope.formData.firstname,
@@ -38,12 +40,16 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
           image: $scope.formData.file,
           location: [$scope.formData.longitude, $scope.formData.latitude],
       };
+      var passportHash = $base64.encode(userData);
+      var faceId = 1;
+      $scope.refreshHash(1,passportHash);
       console.log("****User Data to be added",userData);
 
         // Saves the user data to the db
         $http.post('/users', userData)
             .success(function (data) {
-              gservice.refresh('23.23','32.32',data.location);
+              console.log("Data Retrieved",data);
+              gservice.refresh('0.0','0.0',data);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
