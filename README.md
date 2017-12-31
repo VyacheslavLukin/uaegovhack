@@ -1,5 +1,9 @@
 # UAE Government Virtual Hackathon project
 
+
+# Start everything
+``docker-compose up --build``
+
 ## Parity PoA network based on docker-compose
 
 Setup your first Parity PoA network with 3 authorities and 3 members.
@@ -53,11 +57,46 @@ Smart contract will be automatically deployed to the blockchain network on `dock
 docker-compose logs | grep 'Contract address'
 ```
 
+or generate one more with
+```docker-compose run deployer```
+
+
 ## Node.js server as a backend
 
-### Setup
+```docker-compose run web```
 
-1. ?
+`http://localhost` for UI
+
+## CV face recognition
+
+```docker-compose run cv```
+
+#### How to check
+Get face_id for known image
+
+```curl -X POST -F "file=@3.png" http://localhost:5001/get_face_id```
+
+New image
+
+```curl -X POST -F "file=@3.png" http://localhost:5001/new_image```
+
+## Data analysis part
+
+```docker-compose run analytics```
+
+### How to check
+```curl -i -X GET http://localhost:5501/analytics/?user=0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8```
+
+## Blockchain api
+
+```docker-compose run blkchain_api```
+
+### How to check
+
+```curl -X GET http://localhost:5050/getTravels?passportHash=0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8```
+
+## Nginx
+no need to rebuild manually, should run with `docker-compose up`
 
 # Open datasets and API relevant to the project
 1. [Global airports](https://old.datahub.io/dataset/global-airports)
