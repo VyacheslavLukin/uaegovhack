@@ -145,6 +145,13 @@ def upload_image():
 #     header['Access-Control-Allow-Origin'] = '*'
 #     return response
 
+@app.after_request
+def allow_cross_domain(response: flask.Response):
+    """Hook to set up response headers."""
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'content-type'
+    return response
+
 
 if __name__ == "__main__":
     train_classifier()

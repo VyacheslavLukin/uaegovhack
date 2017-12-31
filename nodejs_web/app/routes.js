@@ -73,6 +73,21 @@ module.exports = function(app) {
      });
      });
 
+     app.post('/analyseUser', function(req, res){
+         // Creates a new User based on the Mongoose schema and the post bo.dy
+         //TODO: Hardcoded user - change it later
+         request.get({url:'http://localhost:5501/analytics?user=0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8'
+         }, function optionalCallback(err, httpResponse, body) {
+           if (err) {
+              console.log('Analysis failed:', err);
+              res.json(err);
+           }
+           else{
+             console.log('Analysis successful!  Server responded with:', body);
+             res.json(body);
+           }
+       });
+       });
        // var newuser = new User(req.body);
        // console.log("New User",newuser);
        //

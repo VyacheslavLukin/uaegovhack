@@ -11,7 +11,10 @@
 
         <!-- Panel Body -->
         <div class="panel-body">
-
+          <div ng-if="showAnalyse" >
+            <button type="submit" ng-if="showAnalyse" class="btn btn-danger btn-block" ng-click="analyseUser()" >Analyse User</button>
+            <input type="textarea"  class="form-control" id="analysisText"  ng-model="formData.analysisText"  readonly>
+          </div>
             <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
             <form name ="addForm" novalidate>
 
