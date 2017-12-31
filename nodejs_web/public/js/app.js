@@ -15,6 +15,6 @@ var app = angular.module('innosoftApp', ['addCtrl', 'queryCtrl','headerCtrl','ge
                  templateUrl: 'partials/queryForm.html',
 
              // All else forward to the Join Team Control Panel
-           }).otherwise({redirectTo:'/find'})
+           }).otherwise({redirectTo:'/add'})
 
     });
