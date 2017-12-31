@@ -41,9 +41,8 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
       };
 
       // Function for refreshing the HTML5 verified location (used by refresh button)
-    $scope.refreshHash = function(faceIdVal, passportHashVal){
-            console.log("Faace id Val",passportHashVal);
-            $scope.formData.faceId = faceIdVal;
+    $scope.refreshHash = function(passportHashVal){
+            console.log("Hash  Val",passportHashVal);
             $scope.formData.passportHash = passportHashVal;
         };
     // Creates a new user based on the form fields
@@ -64,13 +63,18 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
           location: [$scope.formData.longitude, $scope.formData.latitude],
       };
       var passportHash = $base64.encode(userData);
-      var faceId = 1;
-      $scope.refreshHash(1,passportHash);
+      //TODO Remove hardcoding
+      passportHash = '0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8';
+      $scope.refreshHash(passportHash);
+
+      var formData = {
+          passportHash: $scope.formData.passportHash
+      };
 //      console.log("****User Data to be added",userData);
       console.log("***********Call Blcokchain User API**********");
 
         // Saves the user data to the db
-        $http.post('/users', userData)
+        $http.post('/users', formData)
             .success(function (data) {
               console.log("Data Retrieved",data);
               gservice.refresh('0.0','0.0',data);
@@ -91,7 +95,7 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
         $http.post('/analyseUser', userData)
             .success(function (data) {
               var response1 = JSON.parse(data);
-              console.log("*********** Data Analysed",data);
+              console.log("*********** Data Analysed ********* ");
               $scope.formData.analysisText = "Attention! The user's Probability of being wrong is: "+response1.probability;
             })
             .error(function (data) {

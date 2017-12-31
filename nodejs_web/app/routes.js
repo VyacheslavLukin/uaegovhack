@@ -13,16 +13,6 @@ module.exports = function(app) {
     // Retrieve records for all users in the db
     app.post('/userInfo', function(req, res){
 
-        // // Uses Mongoose schema to run the search (empty conditions)
-        // var query = User.find({username:req.body.username});
-        // query.exec(function(err, users){
-        //     if(err) {
-        //         res.send(err);
-        //     } else {
-        //         // If no errors are found, it responds with a JSON of all users
-        //         res.json(users);
-        //     }
-        // });
 
         console.log("*** File ",req.body.file)
         var file1 = base64.decode(req.body.file);
@@ -53,14 +43,12 @@ module.exports = function(app) {
 
 
 
-    // POST Routes
-   // --------------------------------------------------------
-   // Provides method for saving new users in the db
    app.post('/users', function(req, res){
 
-       // Creates a new User based on the Mongoose schema and the post bo.dy
+     var modifiedUrl = 'http://localhost:5050/getTravels?passportHash='+req.body.passportHash;
+     console.log("BlockChain URL",modifiedUrl);
 
-       request.get({url:'http://localhost:5050/getTravels?passportHash=0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8'
+       request.get({url:modifiedUrl
        }, function optionalCallback(err, httpResponse, body) {
          if (err) {
             console.log('upload failed:', err);
@@ -74,9 +62,10 @@ module.exports = function(app) {
      });
 
      app.post('/analyseUser', function(req, res){
-         // Creates a new User based on the Mongoose schema and the post bo.dy
-         //TODO: Hardcoded user - change it later
-         request.get({url:'http://localhost:5501/analytics?user=0xlbx02acp4ufxoxu0qtvaoo2oxoofvx61c46l86m8'
+
+       var modifiedUrl = 'http://localhost:5501/analytics?user='+req.body.user;
+       console.log("Analysis URL",modifiedUrl);
+         request.get({url:modifiedUrl
          }, function optionalCallback(err, httpResponse, body) {
            if (err) {
               console.log('Analysis failed:', err);
@@ -88,15 +77,4 @@ module.exports = function(app) {
            }
        });
        });
-       // var newuser = new User(req.body);
-       // console.log("New User",newuser);
-       //
-       // // New User is saved in the db.
-       // newuser.save(function(err){
-       //     if(err)
-       //         res.send(err);
-       //     else
-       //         // If no errors are found, it responds with a JSON of the new user
-       //         res.json(req.body);
-       // });
 };
