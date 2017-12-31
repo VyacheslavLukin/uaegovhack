@@ -33,9 +33,12 @@ module.exports = function(app) {
           }
         }}, function optionalCallback(err, httpResponse, body) {
           if (err) {
-            return console.error('upload failed:', err);
+            console.log('CV API  Error!  Server responded with:', err);
+            res.json(err);
+          }else {
+            console.log('CV API  successful!  Server responded with:', body);
+            res.json(body);
           }
-        console.log('Upload successful!  Server responded with:', body);
       });
     });
 
@@ -50,11 +53,11 @@ module.exports = function(app) {
        request.get({url:modifiedUrl
        }, function optionalCallback(err, httpResponse, body) {
          if (err) {
-            console.log('upload failed:', err);
+           console.log('Blockchain API  Error!  Server responded with:', err);
             res.json(err);
          }
          else{
-           console.log('Upload successful!  Server responded with:', body);
+           console.log('Blockchain API  successful!  Server responded with:', body);
            res.json(body);
          }
      });
@@ -67,7 +70,7 @@ module.exports = function(app) {
          request.get({url:modifiedUrl
          }, function optionalCallback(err, httpResponse, body) {
            if (err) {
-              console.log('Analysis failed:', err);
+             console.log('Analysis API  Error!  Server responded with:', err);
               res.json(err);
            }
            else{
