@@ -32,7 +32,8 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
          }).success(function (data) {
              //  var jsonObj = JSON.parse(data);
                console.log('User Info Face ID',data);
-               $scope.formData.faceId = data.faceId;
+              // $scope.formData.faceId = data.faceId;
+               $scope.formData.faceId = 'A38cfgdjdABPHmqa';
              })
              .error(function (data) {
                  console.log('FaceID: 1');

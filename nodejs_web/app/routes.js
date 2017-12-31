@@ -14,7 +14,6 @@ module.exports = function(app) {
     app.post('/userInfo', function(req, res){
 
 
-        console.log("*** File ",req.body.file)
         var file1 = base64.decode(req.body.file);
         console.log("*** After File ",file1);
 
